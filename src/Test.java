@@ -17,8 +17,8 @@ public class Test {
     }
 
     public void initialTest(){
-
        this.gui.setGridPanel(this.gui, this.row,this.col);
+
     }
 
 

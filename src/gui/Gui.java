@@ -8,58 +8,64 @@ import java.awt.*;
  */
 public class Gui extends javax.swing.JFrame {
 
-        private javax.swing.JButton[] jButton;
+
+        private JButton[] jButton;
+        JPanel mainPanel = new JPanel();
+
+
 
         /**
          * Der Konstruktor.
          */
         public Gui() {
+            this.setMinimumSize(new Dimension(500,500));
+            this.setResizable(true);
+            this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+            this.setTitle("Wahrnehmungstheorie");
+            mainPanel.setSize(this.getWidth(),this.getHeight());
+            mainPanel.setLayout(new BorderLayout());
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            pack();
+            this.add(mainPanel);
+
+
 
         }
 
     public void setGridPanel(Gui gui, int row, int col){
-
-
-        this.jButton = new javax.swing.JButton[row*col];
+        jButton = new JButton[row*col];
         ButtonListener bl = new ButtonListener();
-
-        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-        jPanel1.setPreferredSize(new Dimension(200,200));
-        jPanel1.setMinimumSize(jPanel1.getPreferredSize());
+        JPanel jPanel1 = new JPanel();
+        jPanel1.setSize(mainPanel.getWidth()-120,mainPanel.getHeight());
         jPanel1.setLayout((new java.awt.GridLayout( row, col )));
 
 
 
-
-        for ( int i = 0; i<row*col; i++ ) {
+        for ( int i = 0; i < row*col; i++ ) {
             jButton[i] = new javax.swing.JButton ( "JButton" + (i+1) );
             jButton[i].addActionListener ( bl );
             jPanel1.add ( jButton[i] );
         }
 
 
-        gui.getContentPane().add ( jPanel1 ) ;
+        mainPanel.add ( jPanel1,BorderLayout.WEST ) ;
+        jPanel1.setVisible(true);
 
 
     }
 
-    public void setTestpanel(Gui gui, int width, int height){
-        javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
-        jPanel2.setPreferredSize(new Dimension(width,height));
-        jPanel2.setMinimumSize(jPanel2.getPreferredSize());
+    public void setTestpanel(Gui gui){
+        JPanel jPanel2 = new JPanel();
+        jPanel2.setSize(100,mainPanel.getHeight());
         jPanel2.setLayout((new java.awt.FlowLayout()));
         jPanel2.add(new JButton());
 
-        gui.getContentPane().add(jPanel2);
+        mainPanel.add(jPanel2, BorderLayout.EAST);
+        jPanel2.setVisible(true);
     }
 
 
         class ButtonListener implements java.awt.event.ActionListener {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-
                 for (int i=0; i<jButton.length; i++) {
                     if( e.getSource() == jButton[i] ){
                         System.out.println("JButton" + (i+1) + " wurde geklickt.");
