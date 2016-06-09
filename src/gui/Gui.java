@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -43,6 +44,16 @@ public class Gui extends javax.swing.JFrame {
         gui.getContentPane().add ( jPanel1 ) ;
 
 
+    }
+
+    public void setTestpanel(Gui gui, int width, int height){
+        javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
+        jPanel2.setPreferredSize(new Dimension(width,height));
+        jPanel2.setMinimumSize(jPanel2.getPreferredSize());
+        jPanel2.setLayout((new java.awt.FlowLayout()));
+        jPanel2.add(new JButton());
+
+        gui.getContentPane().add(jPanel2);
     }
 
 
