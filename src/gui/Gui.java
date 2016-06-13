@@ -15,6 +15,8 @@ public class Gui extends javax.swing.JFrame {
         private JButton[] jButton;
         JPanel mainPanel = new JPanel();
         JLabel testName = new JLabel();
+        JLabel testpresantationTimer = new JLabel("0");
+        Integer[] testArray;
 
 
 
@@ -23,7 +25,7 @@ public class Gui extends javax.swing.JFrame {
          * Der Konstruktor.
          */
         public Gui() {
-            this.setMinimumSize(new Dimension(500,500));
+            this.setMinimumSize(new Dimension(1000,1000));
             this.setResizable(true);
 
             // Setze Fenster in die Mitte
@@ -35,10 +37,12 @@ public class Gui extends javax.swing.JFrame {
 
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             this.setTitle("Wahrnehmungstheorie");
-            mainPanel.setSize(this.getWidth(),this.getHeight());
+
 
             mainPanel.setLayout(new BorderLayout());
+            mainPanel.setSize(this.getWidth(),this.getHeight());
             this.testName.setFont(new Font(Font.MONOSPACED, 0, 40));
+            this.testpresantationTimer.setFont(new Font(Font.MONOSPACED, 0, 40));
 
             this.add(mainPanel);
 
@@ -47,10 +51,11 @@ public class Gui extends javax.swing.JFrame {
         }
 
     public void setGridPanel(int row, int col, Integer[] wayarray){
+        this.testArray = wayarray;
         jButton = new JButton[row*col];
         ButtonListener bl = new ButtonListener();
         JPanel jPanel1 = new JPanel();
-        jPanel1.setSize(mainPanel.getWidth()-120,mainPanel.getHeight());
+        jPanel1.setPreferredSize(new Dimension(mainPanel.getWidth()-220,mainPanel.getHeight()));
         jPanel1.setLayout((new java.awt.GridLayout( row, col )));
 
         ArrayList wayarraylist = new ArrayList<Integer>(Arrays.asList(wayarray));
@@ -84,9 +89,19 @@ public class Gui extends javax.swing.JFrame {
 
     public void setTestpanel(){
         JPanel jPanel2 = new JPanel();
-        jPanel2.setSize(100,mainPanel.getHeight());
-        jPanel2.setLayout((new java.awt.FlowLayout()));
-        jPanel2.add(testName);
+        jPanel2.setPreferredSize(new Dimension(200,mainPanel.getHeight()));
+        jPanel2.setLayout((new GridBagLayout()));
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 5;
+        c.anchor = GridBagConstraints.NORTH;
+        jPanel2.add(testName, c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 2;
+        jPanel2.add(testpresantationTimer, c);
 
 
 
@@ -95,18 +110,44 @@ public class Gui extends javax.swing.JFrame {
     }
 
     public void setTimerForPresentation(){
-        new java.util.Timer().schedule(
+
+
+        java.util.Timer timer = new java.util.Timer();
+        timer.schedule(
                 new java.util.TimerTask() {
+                    int i = 0;
                     @Override
                     public void run() {
-                        for ( int i = 0; i < jButton.length; i++ ) {
-                            jButton[i].setBackground(Color.black);
-                            jButton[i].setEnabled(true);
+                        testpresantationTimer.setText(Integer.toString (i++));
+                        if(i == 5){
+                            timer.cancel();
+                            for ( int i = 0; i < jButton.length; i++ ) {
+                                jButton[i].setBackground(Color.black);
+                                jButton[i].setEnabled(true);
+                            }
                         }
                     }
                 },
-                5000
+                0,1000
         );
+
+
+/*
+        for(int i = 0; i < 3; i++){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            testpresantationTimer.setText(Integer.toString (i + 1));
+        }
+
+        for ( int i = 0; i < jButton.length; i++ ) {
+            jButton[i].setBackground(Color.black);
+            jButton[i].setEnabled(true);
+        }
+*/
     }
 
     public void setTestLabel(String testname){
@@ -115,11 +156,21 @@ public class Gui extends javax.swing.JFrame {
 
 
         class ButtonListener implements java.awt.event.ActionListener {
+            int zae = 0;
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                for (int i=0; i<testArray.length; i++) {
+                    if( e.getSource() == jButton[i] ){
+                        jButton[i].setEnabled(false);
+                        zae++;
+                    }
+                }
+                if(zae == testArray.length){
+                    System.out.println("fertig");
+                }
                 for (int i=0; i<jButton.length; i++) {
                     if( e.getSource() == jButton[i] ){
-                        System.out.println("JButton" + (i) + " wurde geklickt.");
                         jButton[i].setBackground(Color.red);
+
                     }
                 }
             }
