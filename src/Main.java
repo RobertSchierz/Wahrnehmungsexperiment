@@ -6,9 +6,9 @@ public class Main {
         Gui gui = new Gui();
         gui.setTestpanel();
 
-        Test test1 = new Test(gui ,10 ,10);
+        Test test1 = new Test(gui ,10 ,10, "Test 1");
         test1.removeButtons();
-        Test test2 = new Test(gui ,3 ,3);
+        Test test2 = new Test(gui ,10 ,10, "Test 2");
 
 
 

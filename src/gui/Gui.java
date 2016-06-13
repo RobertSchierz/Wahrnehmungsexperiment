@@ -11,6 +11,8 @@ public class Gui extends javax.swing.JFrame {
 
         private JButton[] jButton;
         JPanel mainPanel = new JPanel();
+        JLabel testName = new JLabel();
+
 
 
 
@@ -20,12 +22,20 @@ public class Gui extends javax.swing.JFrame {
         public Gui() {
             this.setMinimumSize(new Dimension(500,500));
             this.setResizable(true);
+
+            // Setze Fenster in die Mitte
+            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+            int x = (int) (((dimension.getWidth() - this.getWidth()) / 2) - (this.getWidth()/2));
+            int y = (int) (((dimension.getHeight() - this.getHeight()) / 2) - (this.getHeight()/2));
+            this.setLocation(x, y);
+
+
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             this.setTitle("Wahrnehmungstheorie");
             mainPanel.setSize(this.getWidth(),this.getHeight());
 
             mainPanel.setLayout(new BorderLayout());
-
+            this.testName.setFont(new Font(Font.MONOSPACED, 0, 40));
 
             this.add(mainPanel);
 
@@ -43,7 +53,9 @@ public class Gui extends javax.swing.JFrame {
 
 
         for ( int i = 0; i < row*col; i++ ) {
-            jButton[i] = new javax.swing.JButton ( "JButton" + (i+1) );
+            jButton[i] = new javax.swing.JButton ();
+            jButton[i].setPreferredSize(new Dimension(100,100));
+            jButton[i].setBackground(Color.black);
             jButton[i].addActionListener ( bl );
             jPanel1.add ( jButton[i] );
         }
@@ -62,10 +74,14 @@ public class Gui extends javax.swing.JFrame {
         JPanel jPanel2 = new JPanel();
         jPanel2.setSize(100,mainPanel.getHeight());
         jPanel2.setLayout((new java.awt.FlowLayout()));
-        jPanel2.add(new JButton());
+        jPanel2.add(testName);
 
         mainPanel.add(jPanel2, BorderLayout.EAST);
         jPanel2.setVisible(true);
+    }
+
+    public void setTestLabel(String testname){
+            this.testName.setText(testname);
     }
 
 
@@ -74,6 +90,7 @@ public class Gui extends javax.swing.JFrame {
                 for (int i=0; i<jButton.length; i++) {
                     if( e.getSource() == jButton[i] ){
                         System.out.println("JButton" + (i+1) + " wurde geklickt.");
+                        jButton[i].setBackground(Color.red);
                     }
                 }
             }
