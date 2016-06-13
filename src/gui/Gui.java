@@ -23,7 +23,9 @@ public class Gui extends javax.swing.JFrame {
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             this.setTitle("Wahrnehmungstheorie");
             mainPanel.setSize(this.getWidth(),this.getHeight());
+
             mainPanel.setLayout(new BorderLayout());
+
 
             this.add(mainPanel);
 
@@ -31,7 +33,7 @@ public class Gui extends javax.swing.JFrame {
 
         }
 
-    public void setGridPanel(Gui gui, int row, int col){
+    public void setGridPanel(int row, int col){
         jButton = new JButton[row*col];
         ButtonListener bl = new ButtonListener();
         JPanel jPanel1 = new JPanel();
@@ -49,11 +51,14 @@ public class Gui extends javax.swing.JFrame {
 
         mainPanel.add ( jPanel1,BorderLayout.WEST ) ;
         jPanel1.setVisible(true);
-
-
     }
 
-    public void setTestpanel(Gui gui){
+    public void removeTest(){
+        BorderLayout layout = (BorderLayout) mainPanel.getLayout();
+        mainPanel.remove(layout.getLayoutComponent(BorderLayout.WEST));
+    }
+
+    public void setTestpanel(){
         JPanel jPanel2 = new JPanel();
         jPanel2.setSize(100,mainPanel.getHeight());
         jPanel2.setLayout((new java.awt.FlowLayout()));

@@ -17,8 +17,11 @@ public class Test {
     }
 
     public void initialTest(){
-       this.gui.setGridPanel(this.gui, this.row,this.col);
+       this.gui.setGridPanel(this.row,this.col);
+    }
 
+    public void removeButtons(){
+        this.gui.removeTest();
     }
 
 
