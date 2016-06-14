@@ -25,13 +25,17 @@ public class Gui extends javax.swing.JFrame {
          * Der Konstruktor.
          */
         public Gui() {
-            this.setMinimumSize(new Dimension(1000,1000));
-            this.setResizable(true);
+
 
             // Setze Fenster in die Mitte
             Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-            int x = (int) (((dimension.getWidth() - this.getWidth()) / 2) - (this.getWidth()/2));
-            int y = (int) (((dimension.getHeight() - this.getHeight()) / 2) - (this.getHeight()/2));
+
+            this.setMinimumSize(new Dimension((int) dimension.getWidth() / 2 ,(int) dimension.getHeight() / 2));
+            this.setResizable(false);
+            this.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+
+            int x = (int) (((dimension.getWidth() - this.getWidth()) / 2));
+            int y = (int) (((dimension.getHeight() - this.getHeight()) / 2) );
             this.setLocation(x, y);
 
 
