@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c74990c6-4008-49b6-abb0-c11d2ff13f55" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/Main.class" afterPath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/gui/Gui$1.class" afterPath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/gui/Gui$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/gui/Gui$ButtonListener.class" afterPath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/gui/Gui$ButtonListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/gui/Gui.class" afterPath="$PROJECT_DIR$/out/production/wahrnehmungstheorie-prj/gui/Gui.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Gui.java" afterPath="$PROJECT_DIR$/src/gui/Gui.java" />
@@ -41,8 +39,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+            <state relative-caret-position="350">
+              <caret line="14" column="96" selection-start-line="14" selection-start-column="96" selection-end-line="14" selection-end-column="96" />
               <folding />
             </state>
           </provider>
@@ -61,8 +59,8 @@
       <file leaf-file-name="Gui.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/Gui.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2180">
-              <caret line="34" column="61" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
+            <state relative-caret-position="1020">
+              <caret line="153" column="2" selection-start-line="153" selection-start-column="2" selection-end-line="153" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,6 +140,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -178,7 +177,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -187,6 +185,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="106" />
     <property name="SearchEverywhereHistoryKey" value="setTestpanel&#9;PSI&#9;JAVA://gui.Gui#setTestpanel&#10;setSize&#9;PSI&#9;JAVA://java.awt.Rectangle#setSize" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gui" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Unnamed">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -635,11 +638,14 @@
       <workItem from="1465844809012" duration="4139000" />
       <workItem from="1465851895429" duration="7097000" />
       <workItem from="1465916643881" duration="2245000" />
+      <workItem from="1465920217213" duration="373000" />
+      <workItem from="1466095626665" duration="148000" />
+      <workItem from="1466117822027" duration="463000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39223000" />
+    <option name="totallyTimeSpent" value="40207000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="3862" height="2122" extended-state="6" />
@@ -780,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12425">
           <caret line="566" column="11" selection-start-line="566" selection-start-column="11" selection-end-line="566" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12425">
           <caret line="566" column="11" selection-start-line="566" selection-start-column="11" selection-end-line="566" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1032,7 +1036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12425">
           <caret line="566" column="11" selection-start-line="566" selection-start-column="11" selection-end-line="566" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,10 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="164" column="11" selection-start-line="164" selection-start-column="11" selection-end-line="164" selection-end-column="11" />
-          <folding>
-            <element signature="e#4996#4997#0" expanded="false" />
-            <element signature="e#5034#5035#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1051,7 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="189" column="16" selection-start-line="189" selection-start-column="16" selection-end-line="189" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1059,6 +1057,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-367">
           <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="14" column="96" selection-start-line="14" selection-start-column="96" selection-end-line="14" selection-end-column="96" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,18 +1076,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Gui.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2180">
-          <caret line="34" column="61" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
+        <state relative-caret-position="1020">
+          <caret line="153" column="2" selection-start-line="153" selection-start-column="2" selection-end-line="153" selection-end-column="2" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

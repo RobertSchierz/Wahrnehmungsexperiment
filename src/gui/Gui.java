@@ -163,8 +163,8 @@ public class Gui extends javax.swing.JFrame {
             int zae = 0;
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 for (int i=0; i<testArray.length; i++) {
-                    if( e.getSource() == jButton[i] ){
-                        jButton[i].setEnabled(false);
+                    if( e.getSource() == jButton[testArray[i]] ){
+                        jButton[testArray[i]].setEnabled(false);
                         zae++;
                     }
                 }

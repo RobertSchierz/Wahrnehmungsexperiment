@@ -9,9 +9,10 @@ public class Main {
         gui.setVisible(true);
 
 
-        Test test1 = new Test(gui ,10 ,10, "Test 1", new Integer[]{30,31,41,51,61,71,72,63,73,64,65,66,67,68,69} );
+        //Test test1 = new Test(gui ,10 ,10, "Test 1", new Integer[]{30,31,41,51,61,71,72,63,73,64,65,66,67,68,69} );
         //test1.removeButtons();
         //Test test2 = new Test(gui ,3 ,3, "Test 2", new Integer[]{0,1,2} );
+        Test test1 = new Test(gui ,10 ,10, "Test 1", new Integer[]{10,11,12,13,14,15,16,17,18,19} );
 
         gui.pack();
 
