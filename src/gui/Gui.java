@@ -2,6 +2,12 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +23,10 @@ public class Gui extends javax.swing.JFrame {
         JLabel testName = new JLabel();
         JLabel testpresantationTimer = new JLabel("0");
         Integer[] testArray;
+        private float timervalue;
+        private boolean stoptimer = false;
+        private int fehler = 0;
+
 
 
 
@@ -113,6 +123,28 @@ public class Gui extends javax.swing.JFrame {
         jPanel2.setVisible(true);
     }
 
+    public void startTestTimer(){
+        java.util.Timer timer = new java.util.Timer();
+        timer.schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+
+                        if(stoptimer){
+                            timer.cancel();
+                        }
+
+                        timervalue += 0.1;
+                      //  System.out.println(timervalue);
+
+
+                    }
+                },
+                0,100
+        );
+
+    }
+
     public void setTimerForPresentation(){
 
 
@@ -129,6 +161,7 @@ public class Gui extends javax.swing.JFrame {
                                 jButton[i].setBackground(Color.black);
                                 jButton[i].setEnabled(true);
                             }
+                            startTestTimer();
                         }
                     }
                 },
@@ -154,6 +187,17 @@ public class Gui extends javax.swing.JFrame {
 */
     }
 
+    public void writeTestData(){
+
+        java.util.List<String> lines = Arrays.asList(this.testName.getText(), "Zeit für Test: " + Float.toString(timervalue) + " Minuten", "Fehler: " + fehler);
+        Path file = Paths.get("Testergebnisse.txt");
+        try {
+            Files.write(file, lines, Charset.forName("UTF-8"),  StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setTestLabel(String testname){
             this.testName.setText(testname);
     }
@@ -161,15 +205,28 @@ public class Gui extends javax.swing.JFrame {
 
         class ButtonListener implements java.awt.event.ActionListener {
             int zae = 0;
+            boolean isIn = false;
+
             public void actionPerformed(java.awt.event.ActionEvent e) {
+
                 for (int i=0; i<testArray.length; i++) {
                     if( e.getSource() == jButton[testArray[i]] ){
                         jButton[testArray[i]].setEnabled(false);
                         zae++;
+                        isIn = true;
                     }
                 }
+                if(!isIn){
+                    fehler++;
+                    //System.out.println(fehler);
+                }else{
+                    isIn = false;
+                }
+
                 if(zae == testArray.length){
+                    stoptimer = true;
                     System.out.println("fertig");
+                    writeTestData();
                 }
                 for (int i=0; i<jButton.length; i++) {
                     if( e.getSource() == jButton[i] ){
