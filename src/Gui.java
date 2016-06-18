@@ -1,5 +1,3 @@
-package gui;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -198,6 +196,9 @@ public class Gui extends javax.swing.JFrame {
         }
     }
 
+
+
+
     public void setTestLabel(String testname){
             this.testName.setText(testname);
     }
@@ -206,6 +207,7 @@ public class Gui extends javax.swing.JFrame {
         class ButtonListener implements java.awt.event.ActionListener {
             int zae = 0;
             boolean isIn = false;
+
 
             public void actionPerformed(java.awt.event.ActionEvent e) {
 
@@ -227,6 +229,11 @@ public class Gui extends javax.swing.JFrame {
                     stoptimer = true;
                     System.out.println("fertig");
                     writeTestData();
+                    zae = 0;
+                    Main.tester(testName.getText());
+
+
+
                 }
                 for (int i=0; i<jButton.length; i++) {
                     if( e.getSource() == jButton[i] ){
@@ -235,5 +242,7 @@ public class Gui extends javax.swing.JFrame {
                     }
                 }
             }
+
+
         }
 }

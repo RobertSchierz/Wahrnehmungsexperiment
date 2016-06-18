@@ -1,5 +1,3 @@
-import gui.Gui;
-
 /**
  * Created by Robert on 09.06.2016.
  */
@@ -16,18 +14,16 @@ public class Test {
         this.col = col;
         this.testname = testname;
         this.wayArray = wayArray;
-
-        initialTest();
     }
 
     public void initialTest(){
-        this.gui.setGridPanel(this.row,this.col, wayArray);
+        this.gui.setGridPanel(this.row,this.col, this.wayArray);
         this.gui.setTestLabel(this.testname);
         this.gui.setTimerForPresentation();
     }
 
-    public void removeButtons(){
-        this.gui.removeTest();
+    public static void removeButtons(){
+        Main.gui.removeTest();
     }
 
 

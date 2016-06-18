@@ -1,3 +1,6 @@
 Test 1
-Zeit für Test: 5.0999975 Minuten
-Fehler: 2
+Zeit für Test: 2.0000002 Minuten
+Fehler: 1
+Test 2
+Zeit für Test: 2.2 Minuten
+Fehler: 3
