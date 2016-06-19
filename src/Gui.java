@@ -25,11 +25,14 @@ public class Gui extends javax.swing.JFrame {
     JLabel testpresantationTimer = new JLabel("0");
     private JButton nextTest = new JButton("Weiter");
     Integer[] testArray;
+    Color[] colorArray;
     private float timervalue;
     private boolean stoptimer = false;
-    private int fehler = 0;
+    private int wayFaults = 0;
+    private int colorFaults = 0;
     public int zae = 0;
     public boolean success = false;
+    public boolean withColor = false;
 
     public Gui() {
 
@@ -64,7 +67,14 @@ public class Gui extends javax.swing.JFrame {
     }
 
     public void setGridPanel(int row, int col, Integer[] wayarray, Color[] colors) {
+        if(colors.length == 0){
+            this.withColor = false;
+        }else if(colors.length > 0){
+            this.withColor = true;
+        }
+
         this.testArray = wayarray;
+        this.colorArray = colors;
         jButton = new JButton[row * col];
         frameButtonListener FrameButtonListener = new frameButtonListener();
 
@@ -81,7 +91,7 @@ public class Gui extends javax.swing.JFrame {
             jButton[i].setEnabled(false);
 
             if (wayarraylist.contains(i)) {
-                if (colors.length == 0) {
+                if (!this.withColor) {
                     jButton[i].setBackground(Color.red);
                 } else {
                     jButton[i].setBackground(colors[i]);
@@ -143,11 +153,7 @@ public class Gui extends javax.swing.JFrame {
                         if (stoptimer) {
                             timer.cancel();
                         }
-
                         timervalue += 0.1;
-                        //  System.out.println(timervalue);
-
-
                     }
                 },
                 0, 100
@@ -156,8 +162,6 @@ public class Gui extends javax.swing.JFrame {
     }
 
     public void setTimerForPresentation() {
-
-
         java.util.Timer timer = new java.util.Timer();
         timer.schedule(
                 new java.util.TimerTask() {
@@ -178,29 +182,23 @@ public class Gui extends javax.swing.JFrame {
                 },
                 0, 1000
         );
-
-
-/*
-        for(int i = 0; i < 3; i++){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            testpresantationTimer.setText(Integer.toString (i + 1));
-        }
-
-        for ( int i = 0; i < jButton.length; i++ ) {
-            jButton[i].setBackground(Color.black);
-            jButton[i].setEnabled(true);
-        }
-*/
     }
 
     public void writeTestData() {
+        String testDeclaration = "";
+        String colorFaultsText = "";
+        if(this.withColor){
+            testDeclaration = " (Mit Farbvariation)";
+            colorFaultsText = "Farbfehler im richtigem Pfad: " + colorFaults;
+        }else if(!this.withColor){
+            testDeclaration = " (Ohne Farbvariation)";
+            colorFaultsText = "Keine Farbfehler möglich!";
 
-        java.util.List<String> lines = Arrays.asList(this.testName.getText(), "Zeit für Test: " + Float.toString(timervalue) + " Minuten", "Fehler: " + fehler, "gelöst: " + Boolean.toString(success), "---");
+        }
+
+        java.util.List<String> lines = Arrays.asList(this.testName.getText() + testDeclaration, "Zeit für Test: " + Float.toString(timervalue) + " Minuten", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
+
+
         Path file = Paths.get("Testergebnisse.txt");
         try {
             Files.write(file, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
@@ -217,10 +215,14 @@ public class Gui extends javax.swing.JFrame {
     private class nextTest implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             stoptimer = true;
+            errorDetection();
             if (zae == testArray.length) {
 
                 success = true;
             }
+
+
+
             writeTestData();
             success = false;
             zae = 0;
@@ -228,38 +230,55 @@ public class Gui extends javax.swing.JFrame {
         }
     }
 
+    public void errorDetection(){
+        ArrayList wayarraylist = new ArrayList<Integer>(Arrays.asList(this.testArray));
+        for(int i = 0; i<jButton.length;i++){
+            if(jButton[i].getBackground() != Color.black && !wayarraylist.contains(i)){
+                wayFaults++;
+            }
+
+                if(wayarraylist.contains(i) && jButton[i].getBackground() != Color.black){
+                    zae++;
+
+                    if(this.withColor){
+                        if(jButton[i].getBackground() != colorArray[i]){
+                            colorFaults++;
+                        }
+                    }
+
+
+
+            }
+
+
+        }
+    }
 
     public class frameButtonListener implements ActionListener {
 
-        boolean isIn = false;
-
         public void actionPerformed(ActionEvent e) {
-            for (int i = 0; i < testArray.length; i++) {
-                if (e.getSource() == jButton[testArray[i]]) {
-                    //jButton[testArray[i]].setEnabled(false);
-                    zae++;
-                    isIn = true;
-                }
-            }
-            if (!isIn) {
-                fehler++;
-                //System.out.println(fehler);
-            } else {
-                isIn = false;
-            }
-
-
             for (int i = 0; i < jButton.length; i++) {
                 if (e.getSource() == jButton[i]) {
-                    if (((JButton) e.getSource()).getBackground() == Color.black) {
-                        jButton[i].setBackground(Color.red);
-                    } else if (((JButton) e.getSource()).getBackground() == Color.red) {
-                        jButton[i].setBackground(Color.yellow);
-                    } else if (((JButton) e.getSource()).getBackground() == Color.yellow) {
-                        jButton[i].setBackground(Color.blue);
-                    } else if (((JButton) e.getSource()).getBackground() == Color.blue) {
-                        jButton[i].setBackground(Color.black);
+
+                    if(withColor){
+                        if (((JButton) e.getSource()).getBackground() == Color.black) {
+                            jButton[i].setBackground(Color.red);
+                        } else if (((JButton) e.getSource()).getBackground() == Color.red) {
+                            jButton[i].setBackground(Color.yellow);
+                        } else if (((JButton) e.getSource()).getBackground() == Color.yellow) {
+                            jButton[i].setBackground(Color.blue);
+                        } else if (((JButton) e.getSource()).getBackground() == Color.blue) {
+                            jButton[i].setBackground(Color.black);
+                        }
+                    }else if(!withColor){
+                        if (((JButton) e.getSource()).getBackground() == Color.black) {
+                            jButton[i].setBackground(Color.red);
+                        } else if (((JButton) e.getSource()).getBackground() == Color.red) {
+                            jButton[i].setBackground(Color.black);
+                        }
                     }
+
+
 
                 }
             }
