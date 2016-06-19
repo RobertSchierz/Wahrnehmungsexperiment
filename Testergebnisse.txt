@@ -1,12 +1,18 @@
 Test 1 (Mit Farbvariation)
-Zeit für Test: 3.4999988 Minuten
+Zeit für Test: 4.599998 Minuten
 Pfadfehler: 0
-Farbfehler im richtigem Pfad: 2
+Farbfehler im richtigem Pfad: 0
 gelöst: true
 ---
 Test 2 (Ohne Farbvariation)
-Zeit für Test: 3.6999986 Minuten
-Pfadfehler: 3
+Zeit für Test: 4.799998 Minuten
+Pfadfehler: 0
 Keine Farbfehler möglich!
-gelöst: false
+gelöst: true
+---
+Test 3 (Ohne Farbvariation)
+Zeit für Test: 4.8999977 Minuten
+Pfadfehler: 0
+Keine Farbfehler möglich!
+gelöst: true
 ---

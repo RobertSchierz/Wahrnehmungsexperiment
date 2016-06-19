@@ -61,15 +61,16 @@ public class Gui extends javax.swing.JFrame {
         this.nextTest.setFocusPainted(false);
         this.nextTest.setBorder(new LineBorder(Color.BLACK));
 
+
         this.add(mainPanel);
 
 
     }
 
     public void setGridPanel(int row, int col, Integer[] wayarray, Color[] colors) {
-        if(colors.length == 0){
+        if (colors.length == 0) {
             this.withColor = false;
-        }else if(colors.length > 0){
+        } else if (colors.length > 0) {
             this.withColor = true;
         }
 
@@ -166,15 +167,16 @@ public class Gui extends javax.swing.JFrame {
         timer.schedule(
                 new java.util.TimerTask() {
                     int i = 0;
-
                     @Override
                     public void run() {
+                        nextTest.setEnabled(false);
                         testpresantationTimer.setText(Integer.toString(i++));
-                        if (i == 2) {
+                        if (i == 11) {
                             timer.cancel();
                             for (int i = 0; i < jButton.length; i++) {
                                 jButton[i].setBackground(Color.black);
                                 jButton[i].setEnabled(true);
+                                nextTest.setEnabled(true);
                             }
                             startTestTimer();
                         }
@@ -187,10 +189,10 @@ public class Gui extends javax.swing.JFrame {
     public void writeTestData() {
         String testDeclaration = "";
         String colorFaultsText = "";
-        if(this.withColor){
+        if (this.withColor) {
             testDeclaration = " (Mit Farbvariation)";
             colorFaultsText = "Farbfehler im richtigem Pfad: " + colorFaults;
-        }else if(!this.withColor){
+        } else if (!this.withColor) {
             testDeclaration = " (Ohne Farbvariation)";
             colorFaultsText = "Keine Farbfehler möglich!";
 
@@ -222,7 +224,6 @@ public class Gui extends javax.swing.JFrame {
             }
 
 
-
             writeTestData();
             success = false;
             zae = 0;
@@ -230,22 +231,21 @@ public class Gui extends javax.swing.JFrame {
         }
     }
 
-    public void errorDetection(){
+    public void errorDetection() {
         ArrayList wayarraylist = new ArrayList<Integer>(Arrays.asList(this.testArray));
-        for(int i = 0; i<jButton.length;i++){
-            if(jButton[i].getBackground() != Color.black && !wayarraylist.contains(i)){
+        for (int i = 0; i < jButton.length; i++) {
+            if (jButton[i].getBackground() != Color.black && !wayarraylist.contains(i)) {
                 wayFaults++;
             }
 
-                if(wayarraylist.contains(i) && jButton[i].getBackground() != Color.black){
-                    zae++;
+            if (wayarraylist.contains(i) && jButton[i].getBackground() != Color.black) {
+                zae++;
 
-                    if(this.withColor){
-                        if(jButton[i].getBackground() != colorArray[i]){
-                            colorFaults++;
-                        }
+                if (this.withColor) {
+                    if (jButton[i].getBackground() != colorArray[i]) {
+                        colorFaults++;
                     }
-
+                }
 
 
             }
@@ -260,7 +260,7 @@ public class Gui extends javax.swing.JFrame {
             for (int i = 0; i < jButton.length; i++) {
                 if (e.getSource() == jButton[i]) {
 
-                    if(withColor){
+                    if (withColor) {
                         if (((JButton) e.getSource()).getBackground() == Color.black) {
                             jButton[i].setBackground(Color.red);
                         } else if (((JButton) e.getSource()).getBackground() == Color.red) {
@@ -270,14 +270,13 @@ public class Gui extends javax.swing.JFrame {
                         } else if (((JButton) e.getSource()).getBackground() == Color.blue) {
                             jButton[i].setBackground(Color.black);
                         }
-                    }else if(!withColor){
+                    } else if (!withColor) {
                         if (((JButton) e.getSource()).getBackground() == Color.black) {
                             jButton[i].setBackground(Color.red);
                         } else if (((JButton) e.getSource()).getBackground() == Color.red) {
                             jButton[i].setBackground(Color.black);
                         }
                     }
-
 
 
                 }

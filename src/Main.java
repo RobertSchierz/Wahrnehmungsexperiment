@@ -29,10 +29,10 @@ public class Main {
                 Test test2 = new Test(Main.gui, 3, 3, "Test 2", new Integer[]{3, 4, 5}, new Color[]{});
                 test2.initialTest();
                 break;
-           /* case "Test 2":
-                 Test test3 = new Test(gui ,10 ,10, "Test 3", new Integer[]{30,31,41,51,61,71,72,63,73,64,65,66,67,68,69} );
+            case "Test 2":
+                 Test test3 = new Test(gui ,10 ,10, "Test 3", new Integer[]{30,31,41,51,61,71,72,63,73,64,65,66,67,68,69}, new Color[]{} );
                  test3.initialTest();
-                break;*/
+                break;
             default:
                 System.exit(0);
                 break;
