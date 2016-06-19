@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.PrintWriter;
 
 public class Main {
@@ -10,35 +11,33 @@ public class Main {
 
         try {
             PrintWriter writer = new PrintWriter("Testergebnisse.txt", "UTF-8");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Fehler beim erstellen von Datei");
         }
 
-        Test test1 = new Test(Main.gui ,3 ,3, "Test 1", new Integer[]{0,1,2} );
+        Test test1 = new Test(Main.gui, 3, 3, "Test 1", new Integer[]{0, 1, 2}, new Color[]{Color.red, Color.yellow, Color.blue});
         test1.initialTest();
 
         Main.gui.pack();
 
     }
 
-    public static void testController(String testname){
+    public static void testController(String testname) {
         Test.removeButtons();
-        switch (testname){
+        switch (testname) {
             case "Test 1":
-                Test test2 = new Test(Main.gui ,4 ,4, "Test 2", new Integer[]{3,4,5} );
+                Test test2 = new Test(Main.gui, 4, 4, "Test 2", new Integer[]{3, 4, 5}, new Color[]{});
                 test2.initialTest();
                 break;
             case "Test 2":
-                Test test3 = new Test(gui ,10 ,10, "Test 3", new Integer[]{30,31,41,51,61,71,72,63,73,64,65,66,67,68,69} );
-                test3.initialTest();
+                // Test test3 = new Test(gui ,10 ,10, "Test 3", new Integer[]{30,31,41,51,61,71,72,63,73,64,65,66,67,68,69} );
+                // test3.initialTest();
                 break;
             default:
-               System.exit(0);
+                System.exit(0);
                 break;
         }
     }
-
-
 }
 
 
