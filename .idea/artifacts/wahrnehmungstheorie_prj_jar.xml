@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="wahrnehmungstheorie-prj:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/wahrnehmungstheorie_prj_jar</output-path>
+    <root id="archive" name="wahrnehmungstheorie-prj.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="wahrnehmungstheorie-prj" />
+    </root>
+  </artifact>
+</component>

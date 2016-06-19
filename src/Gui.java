@@ -157,7 +157,7 @@ public class Gui extends javax.swing.JFrame {
                         timervalue += 0.1;
                     }
                 },
-                0, 100
+                0, 10
         );
 
     }
