@@ -1,6 +1,15 @@
 Test 1
-Zeit für Test: 2.0000002 Minuten
+Zeit für Test: 2.4999998 Minuten
 Fehler: 1
+gelöst: true
+---
 Test 2
-Zeit für Test: 2.2 Minuten
-Fehler: 3
+Zeit für Test: 2.6999996 Minuten
+Fehler: 2
+gelöst: true
+---
+Test 3
+Zeit für Test: 2.7999995 Minuten
+Fehler: 4
+gelöst: false
+---

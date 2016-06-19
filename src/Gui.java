@@ -1,5 +1,8 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -20,18 +23,14 @@ public class Gui extends javax.swing.JFrame {
         JPanel mainPanel = new JPanel();
         JLabel testName = new JLabel();
         JLabel testpresantationTimer = new JLabel("0");
+        private JButton nextTest = new JButton("Weiter");
         Integer[] testArray;
         private float timervalue;
         private boolean stoptimer = false;
         private int fehler = 0;
+        public int zae = 0;
+    public boolean success = false;
 
-
-
-
-
-        /**
-         * Der Konstruktor.
-         */
         public Gui() {
 
 
@@ -55,6 +54,9 @@ public class Gui extends javax.swing.JFrame {
             mainPanel.setSize(this.getWidth(),this.getHeight());
             this.testName.setFont(new Font(Font.MONOSPACED, 0, 40));
             this.testpresantationTimer.setFont(new Font(Font.MONOSPACED, 0, 40));
+            this.nextTest.setFont(new Font(Font.MONOSPACED, 0, 30));
+            this.nextTest.setFocusPainted(false);
+            this.nextTest.setBorder(new LineBorder(Color.BLACK));
 
             this.add(mainPanel);
 
@@ -65,7 +67,8 @@ public class Gui extends javax.swing.JFrame {
     public void setGridPanel(int row, int col, Integer[] wayarray){
         this.testArray = wayarray;
         jButton = new JButton[row*col];
-        ButtonListener bl = new ButtonListener();
+        frameButtonListener FrameButtonListener = new frameButtonListener();
+
         JPanel jPanel1 = new JPanel();
         jPanel1.setPreferredSize(new Dimension(mainPanel.getWidth()-220,mainPanel.getHeight()));
         jPanel1.setLayout((new java.awt.GridLayout( row, col )));
@@ -85,7 +88,7 @@ public class Gui extends javax.swing.JFrame {
                 jButton[i].setBackground(Color.black);
             }
 
-            jButton[i].addActionListener ( bl );
+            jButton[i].addActionListener(FrameButtonListener);
             jPanel1.add ( jButton[i] );
         }
 
@@ -100,6 +103,7 @@ public class Gui extends javax.swing.JFrame {
     }
 
     public void setTestpanel(){
+        nextTest next = new nextTest();
         JPanel jPanel2 = new JPanel();
         jPanel2.setPreferredSize(new Dimension(200,mainPanel.getHeight()));
         jPanel2.setLayout((new GridBagLayout()));
@@ -114,6 +118,11 @@ public class Gui extends javax.swing.JFrame {
         c.gridx = 0;
         c.gridy = 2;
         jPanel2.add(testpresantationTimer, c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 3;
+        nextTest.addActionListener(next);
+        jPanel2.add(nextTest, c);
 
 
 
@@ -153,7 +162,7 @@ public class Gui extends javax.swing.JFrame {
                     @Override
                     public void run() {
                         testpresantationTimer.setText(Integer.toString (i++));
-                        if(i == 5){
+                        if(i == 2){
                             timer.cancel();
                             for ( int i = 0; i < jButton.length; i++ ) {
                                 jButton[i].setBackground(Color.black);
@@ -187,7 +196,7 @@ public class Gui extends javax.swing.JFrame {
 
     public void writeTestData(){
 
-        java.util.List<String> lines = Arrays.asList(this.testName.getText(), "Zeit für Test: " + Float.toString(timervalue) + " Minuten", "Fehler: " + fehler);
+        java.util.List<String> lines = Arrays.asList(this.testName.getText(), "Zeit für Test: " + Float.toString(timervalue) + " Minuten", "Fehler: " + fehler, "gelöst: " + Boolean.toString(success), "---");
         Path file = Paths.get("Testergebnisse.txt");
         try {
             Files.write(file, lines, Charset.forName("UTF-8"),  StandardOpenOption.APPEND);
@@ -203,46 +212,47 @@ public class Gui extends javax.swing.JFrame {
             this.testName.setText(testname);
     }
 
+    private class nextTest implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            stoptimer = true;
+            if(zae == testArray.length){
 
-        class ButtonListener implements java.awt.event.ActionListener {
-            int zae = 0;
-            boolean isIn = false;
+                success = true;
+            }
+            writeTestData();
+            success = false;
+            zae = 0;
+            Main.testController(testName.getText());
+        }
+    }
 
 
-            public void actionPerformed(java.awt.event.ActionEvent e) {
 
-                for (int i=0; i<testArray.length; i++) {
-                    if( e.getSource() == jButton[testArray[i]] ){
-                        jButton[testArray[i]].setEnabled(false);
-                        zae++;
-                        isIn = true;
-                    }
+    public class frameButtonListener implements ActionListener {
+
+        boolean isIn = false;
+        public void actionPerformed(ActionEvent e) {
+            for (int i=0; i<testArray.length; i++) {
+                if( e.getSource() == jButton[testArray[i]] ){
+                    jButton[testArray[i]].setEnabled(false);
+                    zae++;
+                    isIn = true;
                 }
-                if(!isIn){
-                    fehler++;
-                    //System.out.println(fehler);
-                }else{
-                    isIn = false;
-                }
-
-                if(zae == testArray.length){
-                    stoptimer = true;
-                    System.out.println("fertig");
-                    writeTestData();
-                    zae = 0;
-                    Main.tester(testName.getText());
-
-
-
-                }
-                for (int i=0; i<jButton.length; i++) {
-                    if( e.getSource() == jButton[i] ){
-                        jButton[i].setBackground(Color.red);
-
-                    }
-                }
+            }
+            if(!isIn){
+                fehler++;
+                //System.out.println(fehler);
+            }else{
+                isIn = false;
             }
 
 
+            for (int i=0; i<jButton.length; i++) {
+                if( e.getSource() == jButton[i] ){
+                    jButton[i].setBackground(Color.red);
+
+                }
+            }
         }
+    }
 }
