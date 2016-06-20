@@ -157,7 +157,7 @@ public class Gui extends javax.swing.JFrame {
                         timervalue += 0.1;
                     }
                 },
-                0, 10
+                0, 100
         );
 
     }
@@ -198,7 +198,7 @@ public class Gui extends javax.swing.JFrame {
 
         }
 
-        java.util.List<String> lines = Arrays.asList(this.testName.getText() + testDeclaration, "Zeit für Test: " + Float.toString(timervalue) + " Minuten", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
+        java.util.List<String> lines = Arrays.asList(this.testName.getText() + testDeclaration, "Zeit für Test: " + Float.toString(timervalue) + " Sekunden", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
 
 
         Path file = Paths.get("Testergebnisse.txt");
