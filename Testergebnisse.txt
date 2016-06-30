@@ -1,12 +1,6 @@
 Test 1 (Ohne Farbvariation)
-Zeit für Test: 1.4000002 Sekunden
+Zeit für Test: 1.8000003 Sekunden
 Pfadfehler: 0
 Keine Farbfehler möglich!
-gelöst: false
----
-Test 2 (Ohne Farbvariation)
-Zeit für Test: 1.6000003 Sekunden
-Pfadfehler: 0
-Keine Farbfehler möglich!
-gelöst: false
+gelöst: true
 ---
