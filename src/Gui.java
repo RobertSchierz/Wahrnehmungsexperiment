@@ -162,7 +162,7 @@ public class Gui extends javax.swing.JFrame {
 
     }
 
-    public void setTimerForPresentation() {
+    public void setTimerForPresentation(int presentationTimer) {
         java.util.Timer timer = new java.util.Timer();
         timer.schedule(
                 new java.util.TimerTask() {
@@ -171,12 +171,13 @@ public class Gui extends javax.swing.JFrame {
                     public void run() {
                         nextTest.setEnabled(false);
                         testpresantationTimer.setText(Integer.toString(i++));
-                        if (i == 11) {
+                        if (i == presentationTimer) {
                             timer.cancel();
                             for (int i = 0; i < jButton.length; i++) {
                                 jButton[i].setBackground(Color.black);
                                 jButton[i].setEnabled(true);
                                 nextTest.setEnabled(true);
+                                testpresantationTimer.setVisible(false);
                             }
                             startTestTimer();
                         }
@@ -223,10 +224,10 @@ public class Gui extends javax.swing.JFrame {
                 success = true;
             }
 
-
             writeTestData();
             success = false;
             zae = 0;
+            testpresantationTimer.setVisible(true);
             Main.testController(testName.getText());
         }
     }
