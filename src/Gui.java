@@ -35,6 +35,8 @@ public class Gui extends javax.swing.JFrame {
     public int zae = 0;
     public boolean success = false;
     public boolean withColor = false;
+    public int presentationTimer = 0;
+    public long id = 0;
 
     public Gui() {
 
@@ -69,7 +71,7 @@ public class Gui extends javax.swing.JFrame {
 
     }
 
-    public void setGridPanel(int row, int col, Integer[] wayarray, Color[] colors) {
+    public void setGridPanel(int row, int col, Integer[] wayarray, Color[] colors, long id) {
         if (colors.length == 0) {
             this.withColor = false;
         } else if (colors.length > 0) {
@@ -78,6 +80,7 @@ public class Gui extends javax.swing.JFrame {
 
         this.testArray = wayarray;
         this.colorArray = colors;
+        this.id = id;
         jButton = new JButton[row * col];
         frameButtonListener FrameButtonListener = new frameButtonListener();
 
@@ -96,8 +99,6 @@ public class Gui extends javax.swing.JFrame {
             if (wayarraylist.contains(i)) {
                 if (!this.withColor) {
                     jButton[i].setBackground(Color.red);
-                } else {
-                    jButton[i].setBackground(colors[i]);
                 }
 
 
@@ -107,6 +108,12 @@ public class Gui extends javax.swing.JFrame {
 
             jButton[i].addActionListener(FrameButtonListener);
             jPanel1.add(jButton[i]);
+        }
+        if (this.withColor) {
+            for (int i = 0; i < wayarray.length; i++){
+                jButton[wayarray[i]].setBackground(colors[i]);
+            }
+
         }
 
 
@@ -165,6 +172,7 @@ public class Gui extends javax.swing.JFrame {
     }
 
     public void setTimerForPresentation(int presentationTimer) {
+        this.presentationTimer = presentationTimer-1;
         java.util.Timer timer = new java.util.Timer();
         timer.schedule(
                 new java.util.TimerTask() {
@@ -201,12 +209,12 @@ public class Gui extends javax.swing.JFrame {
 
         }
 
-        long id = System.currentTimeMillis();
-
-        java.util.List<String> lines = Arrays.asList("ID: " + id, this.testName.getText() + testDeclaration, "Zeit für Test: " + Float.toString(timervalue) + " Sekunden", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
 
 
-        Path file = Paths.get("Testergebnisse.txt");
+        java.util.List<String> lines = Arrays.asList("ID: " + this.id, this.testName.getText() + testDeclaration, "Testvorbereitungszeit: " + this.presentationTimer, "Zeit für Test: " + Float.toString(timervalue) + " Sekunden", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
+
+
+        Path file = Paths.get("UEG12Testergebnisse_" + Long.toString(this.id) + ".txt");
         try {
             Files.write(file, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
         } catch (IOException e) {
@@ -245,17 +253,15 @@ public class Gui extends javax.swing.JFrame {
 
             if (wayarraylist.contains(i) && jButton[i].getBackground() != Color.black) {
                 zae++;
-
-                if (this.withColor) {
-                    if (jButton[i].getBackground() != colorArray[i]) {
-                        colorFaults++;
-                    }
-                }
-
-
             }
+        }
 
-
+        if (this.withColor) {
+        for(int i = 0; i < this.testArray.length; i++){
+                if (jButton[this.testArray[i]].getBackground() != colorArray[i]) {
+                    colorFaults++;
+                }
+            }
         }
     }
 

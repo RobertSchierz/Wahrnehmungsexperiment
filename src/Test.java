@@ -11,8 +11,9 @@ public class Test {
     private Integer[] wayArray;
     private Color[] colors;
     private int presentationTimer;
+    private long id = 0;
 
-    public Test(Gui gui, int col, int row, String testname, Integer[] wayArray, Color[] colors, int presentationTimer) {
+    public Test(Gui gui, int col, int row, String testname, Integer[] wayArray, Color[] colors, int presentationTimer, long id) {
         this.gui = gui;
         this.row = row;
         this.col = col;
@@ -20,10 +21,11 @@ public class Test {
         this.wayArray = wayArray;
         this.colors = colors;
         this.presentationTimer = presentationTimer;
+        this.id = id;
     }
 
     public void initialTest() {
-        this.gui.setGridPanel(this.row, this.col, this.wayArray, this.colors);
+        this.gui.setGridPanel(this.row, this.col, this.wayArray, this.colors, this.id);
         this.gui.setTestLabel(this.testname);
         this.gui.setTimerForPresentation(this.presentationTimer+1);
     }
