@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 
 
 /**
@@ -199,7 +201,9 @@ public class Gui extends javax.swing.JFrame {
 
         }
 
-        java.util.List<String> lines = Arrays.asList(this.testName.getText() + testDeclaration, "Zeit für Test: " + Float.toString(timervalue) + " Sekunden", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
+        long id = System.currentTimeMillis();
+
+        java.util.List<String> lines = Arrays.asList("ID: " + id, this.testName.getText() + testDeclaration, "Zeit für Test: " + Float.toString(timervalue) + " Sekunden", "Pfadfehler: " + wayFaults, colorFaultsText, "gelöst: " + Boolean.toString(success), "---");
 
 
         Path file = Paths.get("Testergebnisse.txt");
